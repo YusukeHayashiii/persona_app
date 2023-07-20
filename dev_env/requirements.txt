@@ -1,0 +1,11 @@
+numpy
+pandas
+matplotlib
+seaborn
+scikit-learn
+tqdm
+xlrd
+openpyxl
+openai
+langchain
+streamlit

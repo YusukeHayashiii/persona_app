@@ -1,0 +1,21 @@
+version: '3'
+services:
+    jupyterlab:
+        image: jupyterlab:without_conda
+        container_name: openaiapi-jupyterlab # 起動時のコンテナ名
+        build: 
+            context: .
+            dockerfile: Dockerfile
+        environment:
+            - ROOT=TRUE # コンテナ内にroot権限を持たせる
+            - OPENAI_API_KEY=[自分のkey] # APIキーを環境変数に設定
+        volumes: 
+            - "/home/ec2-user/openai_api/:/home/work" # [ホストのpath]：[コンテナのpath]
+        ports: # ホスト：コンテナのポート番号を指定。ホストは他コンテナと番号被らないようにする
+            # Juypterlab用
+            - "8888:8888" 
+            # Streamlit用(複数立ち上げて比較できるようにしておく)
+            - "8501:8501" 
+            - "8502:8502"
+            - "8503:8503"
+        tty: true # コンテナを起動し続ける
